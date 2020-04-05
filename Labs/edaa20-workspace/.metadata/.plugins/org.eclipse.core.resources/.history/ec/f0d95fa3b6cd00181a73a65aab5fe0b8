@@ -1,0 +1,33 @@
+import se.lth.cs.pt.maze.Maze;
+
+public class MazeWalker {
+	private Turtle turtle;
+
+	public MazeWalker(Turtle turtle) {
+		this.turtle = turtle;
+
+	}
+
+	public void walk(Maze maze) {
+		turtle.jumpTo(maze.getXEntry(), maze.getYEntry());
+		while (!maze.wallInFront(turtle.getDirection(), turtle.getX(), turtle.getY())) {
+			if (maze.wallAtLeft(turtle.getDirection(), turtle.getX(), turtle.getY())) {
+
+				turtle.penDown();
+				turtle.forward(1);
+			} else {
+				turtle.left(90);
+				turtle.penDown();
+				turtle.forward(1);
+			}
+		}
+
+		while (maze.wallInFront(turtle.getDirection(), turtle.getX(), turtle.getY())) {
+			if (maze.wallAtLeft(turtle.getDirection(), turtle.getX(), turtle.getY())) {
+				turtle.left(-90);
+				turtle.penDown();
+				turtle.forward(1);
+			}
+		}
+	}
+}

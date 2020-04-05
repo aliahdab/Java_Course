@@ -1,0 +1,13 @@
+public class test6 {
+	
+	public static void main (String[]args) {
+	System.out.println(multadd(1.0,2.0,3.0));
+		multadd (Math.cos(Math.PI/4),0.5,Math.sin(Math.PI/4));
+		
+	}
+	
+	public static double multadd ( double a, double b , double c) {
+		return a*b+c;
+	}
+	
+}

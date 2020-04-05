@@ -1,0 +1,48 @@
+import se.lth.cs.pt.maze.Maze;
+import se.lth.cs.pt.window.SimpleWindow;
+
+public class MazeWalker {
+	private Turtle turtle;
+
+	public MazeWalker(Turtle turtle) {
+		this.turtle = turtle;
+
+	}
+
+	public void walk(Maze maze) {
+		turtle.jumpTo(maze.getXEntry(), maze.getYEntry());
+		SimpleWindow.delay(30);
+		while (!maze.atExit(turtle.getX(), turtle.getY())) {
+			if (maze.wallAtLeft(turtle.getDirection(), turtle.getX(), turtle.getY())
+					&& !maze.wallInFront(turtle.getDirection(), turtle.getX(), turtle.getY())) {
+				turtle.penDown();
+				turtle.forward(1);
+				SimpleWindow.delay(5);
+
+			} else if (maze.wallAtLeft(turtle.getDirection(), turtle.getX(), turtle.getY())
+					&& maze.wallInFront(turtle.getDirection(), turtle.getX(), turtle.getY())) {
+				turtle.left(-90);
+				turtle.penDown();
+				turtle.forward(1);
+				SimpleWindow.delay(5);
+				
+			} else if (!maze.wallAtLeft(turtle.getDirection(), turtle.getX(), turtle.getY())
+					&& maze.wallInFront(turtle.getDirection(), turtle.getX(), turtle.getY())) {
+				turtle.left(90);
+				turtle.penDown();
+				turtle.forward(1);
+				SimpleWindow.delay(5);
+
+	
+
+			} else if (!maze.wallAtLeft(turtle.getDirection(), turtle.getX(), turtle.getY())
+					&& !maze.wallInFront(turtle.getDirection(), turtle.getX(), turtle.getY())) {
+				turtle.left(90);
+				turtle.penDown();
+				turtle.forward(1);
+				SimpleWindow.delay(5);
+
+			}
+		}
+	}
+}

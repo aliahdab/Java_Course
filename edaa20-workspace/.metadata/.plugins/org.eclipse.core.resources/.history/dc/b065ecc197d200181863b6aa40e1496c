@@ -1,0 +1,13 @@
+package polygon;
+
+import java.util.Arrays;
+
+public class Polygon {
+
+	public static void main(String[] args) {
+	int [] a = {3,4,5};
+	int [] b =Arrays.copyOf(a, 2); 
+	}
+
+}
+ 

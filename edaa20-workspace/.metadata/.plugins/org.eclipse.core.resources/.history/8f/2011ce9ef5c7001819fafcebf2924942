@@ -1,0 +1,12 @@
+
+public class test {
+
+	public static void main(String[] args) {
+		String fruit = "banana is ali";
+		char letter = fruit.charAt(0);
+		for (char letter1 : fruit.toCharArray()) {
+			System.out.println(letter);
+		}
+
+	}
+}

@@ -1,0 +1,38 @@
+public class Rational {
+	private int num;
+	private int den;
+	
+	public Rational() {
+		this.num=0;
+		this.den=0;
+	}
+	 public Rational(int num,int den) {
+		 this.den=den;
+		 this.num=num;
+	 }
+	
+	public static void main(String[]args) {
+		Rational r = new Rational();
+		r.num=4;
+		r.den=3;
+	// r.negate(r);
+		r.printRational();
+		System.out.println(r.toString());
+		
+	}
+	
+	public void printRational() {
+	System.out.print(this.num + "/");
+	System.out.print(this.den);
+	System.out.println();
+	}
+	
+	public String toString() {
+		return this.num+"/"+this.den; 
+		}
+	
+	public void negate() {
+	this.num=-this.num;
+	}
+	
+}

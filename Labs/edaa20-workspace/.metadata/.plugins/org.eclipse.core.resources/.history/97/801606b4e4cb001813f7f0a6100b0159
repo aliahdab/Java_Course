@@ -1,0 +1,87 @@
+import se.lth.cs.pt.window.SimpleWindow;
+
+public class Turtle1 {
+
+	/**
+	 * Skapar en sköldpadda som ritar i ritfönstret w. Från början befinner sig
+	 * sköldpaddan i punkten x, y med pennan lyft och huvudet pekande rakt uppåt i
+	 * fönstret (i negativ y-riktning).
+	 */
+
+	private double xcoord; /// instance variables
+	private double ycoord;
+	private SimpleWindow w;
+	private int dir;
+	private boolean penIsDown = false;
+
+	public Turtle(SimpleWindow w, int x, int y) { // the Turtle constructor
+		this.ycoord = y;
+		this.xcoord = x;
+		this.w = w;
+		this.dir = 90;
+
+	}
+
+	/** Sänker pennan. */
+	public void penDown() {
+		penIsDown = true;
+
+	}
+
+	/** Lyfter pennan. */
+	public void penUp() {
+		penIsDown = false;
+
+	}
+
+	/** Går rakt framåt n pixlar i den riktning huvudet pekar. */
+	public void forward(int n) {
+		penIsDown = true;
+		w.moveTo(getX(), getY());
+		xcoord = getX() + n* Math.cos(Math.toRadians(dir));
+		ycoord = getY() + n* Math.cos(Math.toRadians(dir));
+		//xcoord = (int) Math.round((getX() + Math.cos(Math.toRadians(dir)) * n)); // the x coordinate after going
+		//ycoord = (int) Math.round((getY() + Math.sin(Math.toRadians(dir)) * n)); // the y coordinate after going
+		if (penIsDown) {
+			w.lineTo((int)xcoord, (int)ycoord);
+		}
+	}
+
+	/** Vrider beta grader åt vänster runt pennan. */
+	public void left(int beta) { // setter
+		this.dir = getDirection() + beta;
+
+	}
+
+	/**
+	 * Går till punkten newX, newY utan att rita. Pennans läge (sänkt eller lyft)
+	 * och huvudets riktning påverkas inte.
+	 */
+	public void jumpTo(int newX, int newY) {
+
+		w.moveTo(newX, newY);
+		xcoord = newX;
+		ycoord = newY;
+	}
+
+	/** Återställer huvudriktningen till den ursprungliga. */
+	public void turnNorth() { // Setter which sets direction 90 degress.
+		this.dir = 90;
+
+	}
+
+	/** Tar reda på x-koordinaten för sköldpaddans aktuella position. */
+	public int getX() { // getter which gets x coordinate
+		return (int)Math.round(xcoord);
+	}
+
+	/** Tar reda på y-koordinaten för sköldpaddans aktuella position. */
+	public int getY() { // getter which gets y coordinate
+		return (int)Math.round(ycoord);
+	}
+
+	/** Tar reda på sköldpaddans riktning, i grader från den positiva X-axeln. */
+	public int getDirection() { // getter which gets angle's value
+		return this.dir;
+	}
+}

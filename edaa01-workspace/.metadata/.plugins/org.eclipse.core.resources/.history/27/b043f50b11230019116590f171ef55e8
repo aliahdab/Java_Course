@@ -1,0 +1,21 @@
+package test;
+
+import java.util.Arrays;
+
+class Person implements Comparable<Person> {
+
+	private String name;
+	private Integer id;
+
+	public Person(String name, Integer id) {
+		this.name = name;
+		this.id = id;
+	}
+
+	@Override
+	public int compareTo(Person o) {
+
+		return Integer.compare(this.id, id);
+	}
+
+}

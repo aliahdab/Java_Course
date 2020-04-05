@@ -1,0 +1,10 @@
+import se.lth.cs.pt.square.Square;
+
+public class test {
+	public static void main(String[]args) {
+		Square sc = new Square(20,10,40);
+		sc.move(30, 10);
+		int a = sc.getArea();
+	}
+
+}

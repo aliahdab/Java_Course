@@ -1,0 +1,18 @@
+import java.util.Scanner;
+import se.lth.cs.pt.maze.Maze;
+import se.lth.cs.pt.window.SimpleWindow;
+
+public class MazeMain {
+	public static void main(String[] args) {
+		SimpleWindow w = new SimpleWindow(360, 360, "Maze");
+		w.setLineWidth(3);
+		Turtle t = new Turtle(w, 0, 0);
+		MazeWalker mazewalker = new MazeWalker(t);
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter a number between (1-5) which is the Maze you want to use ");
+		Maze m = new Maze(scan.nextInt());
+		m.draw(w);
+		mazewalker.walk(m);
+
+	}
+}

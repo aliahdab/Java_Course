@@ -1,0 +1,28 @@
+package test;
+
+import java.util.Arrays;
+
+class Person implements Comparable<Person> {
+
+	private String name;
+	private Integer id;
+
+	public Person(String name, Integer id) {
+		this.name = name;
+		this.id = id;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+	
+	public void print() {
+		System.out.println(this.id + "- " + this.name);
+	}
+
+	@Override
+	public int compareTo(Person o) {
+		return Integer.compare(this.id, o.id);
+	}
+
+}

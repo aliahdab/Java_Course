@@ -1,0 +1,31 @@
+public class test {
+	public static void countdown(int n) {
+		if (n == 0) {
+			System.out.println("Blastoff!");
+		} else {
+			System.out.println(n);
+			countdown(n - 1);
+		}
+	}
+	public static void countup(int n) {
+		if (n == 0) {
+		System.out.println("Blastoff!");
+		} else {
+		countup(n - 1);
+		System.out.println(n);
+		}
+		}
+	public static void main(String[] args ) {
+		int sum =0;
+		for (int k = 0 ; k<2 ; k++) {
+			for (int i = 0; i<3; i++) {
+				sum = sum +1;
+				if (i==1) {
+					break;
+				}
+			}
+			sum = sum+10;
+		}
+		System.out.println(sum);
+	}
+}

@@ -1,0 +1,149 @@
+
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
+public class SudokuApp extends Application {
+	private TilePane board = new TilePane();
+	private Button btn1 = new Button("Solve ");
+	private Button btn2 = new Button("Clear");
+	private static MySecondTextField[][] gridTextField = new MySecondTextField[9][9];
+	private Sudoku sudoku = new Sudoku();
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	@Override
+	public void start(Stage stage) throws Exception {
+		stage.setScene(new Scene(createContent()));
+
+//		Solve Button Action
+		btn1.setOnAction((e) -> {
+
+			sudoku.getTextFieldGrid();
+			if (!sudoku.solve()) {
+				Alert errorAlert1 = new Alert(AlertType.ERROR);
+				errorAlert1.setContentText("Sudoku Unsolvable");
+				errorAlert1.showAndWait();
+			} else {
+				sudoku.setTextFieldGrid();
+			}
+		});
+
+//		Clear Button Action
+		btn2.setOnAction((e) -> {
+
+			for (int row = 0; row < 9; row++) {
+				for (int col = 0; col < 9; col++) {
+					setGridTextField("", row, col);
+				}
+			}
+		});
+
+		stage.setTitle("Sudoku");
+		stage.show();
+	}
+
+	private Parent createContent() {
+		Pane root = new Pane();
+
+		root.setPrefSize(700, 600);
+		btn1.setPrefSize(100, 60);
+		btn1.setTranslateX(180);
+		btn1.setTranslateY(500);
+		btn1.setFont(new Font("Arial", 16));
+		btn1.setTextFill(Color.BLUE);
+
+		btn2.setPrefSize(100, 60);
+		btn2.setTranslateX(410);
+		btn2.setTranslateY(500);
+		btn2.setFont(new Font("Arial", 16));
+		btn2.setTextFill(Color.CRIMSON);
+
+		board = generateBoard(9, 9);
+
+		root.getChildren().addAll(board, btn1, btn2);
+		return root;
+	}
+
+	private TilePane generateBoard(int colNumbers, int rowNumbers) {
+		board = new TilePane(Orientation.HORIZONTAL);
+		board.setPrefColumns(colNumbers);
+		board.setPrefRows(rowNumbers);
+		board.setPadding(new Insets(3, 3, 3, 3));
+		for (int col = 0; col < colNumbers; col++) {
+			for (int row = 0; row < rowNumbers; row++) {
+				MySecondTextField textfield = new MySecondTextField();
+				gridTextField[col][row] = textfield;
+				board.getChildren().add(gridTextField[col][row]);
+				if ((row < 3 || row > 5) && (col < 3 || col > 5) || (row > 2 && row < 6) && (col > 2 && col < 6)) {
+					textfield.setStyle("-fx-text-inner-color: black;" + "-fx-border-color:black;"
+							+ "-fx-background-color: wheat;");
+				} else {
+					textfield.setStyle("-fx-text-inner-color: slategrey;" + "-fx-border-color:black;"
+							+ "-fx-background-color: white;");
+				}
+			}
+		}
+		board.autosize();
+		return board;
+	}
+
+	public class MySecondTextField extends TextField {
+
+		private MySecondTextField() {
+
+			this.setText("");
+			this.setFont(new Font("Arial", 27));
+			this.setMaxSize(77, 60);
+
+			addTextLimiter(this, 1);
+			this.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+				@Override
+				public void handle(KeyEvent keyEvent) {
+					if (!"123456789".contains(keyEvent.getCharacter())) {
+						keyEvent.consume();
+					}
+				};
+			});
+		}
+
+		private void addTextLimiter(final TextField tf, final int maxLength) {
+			tf.textProperty().addListener(new ChangeListener<String>() {
+				@Override
+				public void changed(final ObservableValue<? extends String> ov, final String oldValue,
+						final String newValue) {
+					if (tf.getText().length() > maxLength) {
+						String s = tf.getText().substring(0, maxLength);
+						tf.setText(s);
+					}
+				}
+			});
+		}
+	}
+
+	public static void setGridTextField(String value, int row, int col) {
+		gridTextField[row][col].setText(value);
+	}
+
+	public static MySecondTextField[][] getGridTextField() {
+		return gridTextField;
+	}
+
+}

@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class ArraysOfObjects {
+
+	public static void main(String[] args) {
+		Scanner scan=new Scanner(System.in);
+		int grade;
+		String name;
+		Student[] students= new Student[4]; 
+		for (int i=0; i<students.length;i++) {
+			students[i]=(new Student (scan.nextLine(),scan.nextInt()));
+		}
+		System.out.printf("#\tStudent\tGrade\n");
+		System.out.printf("-\t------\t-----\n");
+		
+		for(int i=0;i<students.length;i++) {
+			
+			System.out.printf("%d\t%s\t%d\n",i,students[i].getName(),students[i].getGrade());
+			
+		}
+	}
+}

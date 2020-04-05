@@ -1,0 +1,15 @@
+import se.lth.cs.pt.square.Square;
+import se.lth.cs.pt.window.SimpleWindow;
+
+
+public class test {
+	public static void main(String[] args) {
+		
+		Square sq = new Square(20, 10, 30);
+		SimpleWindow w = new SimpleWindow(600,600,"Square");
+		sq.draw(w);
+		sq.move(20, 30);
+		sq.draw(w);
+System.out.println("Arian är " + sq.getArea());
+	}
+}

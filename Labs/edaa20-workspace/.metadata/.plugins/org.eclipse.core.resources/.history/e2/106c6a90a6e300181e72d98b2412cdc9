@@ -1,0 +1,28 @@
+package cards;
+
+//import java.util.ArrayList;
+
+public class spelet21 {
+
+	public static void main(String[] args) {
+		Deck deck = new Deck();
+		Hand hand = new Hand();
+		for (int i = 0; i < 3; i++) {
+			hand.insert(deck.getCard());
+		}
+		int sum = hand.rankSum(false);
+
+		CardWindow w = new CardWindow(2, 6, "Card deck");
+
+		hand.display(w);
+		w.moveTo(w.getWidth() / 2, w.getHeight() / 2);
+		if (sum <= 21) {
+			w.writeText("You Won ,Sum = " + sum);
+		} else {
+			w.setLineColor(java.awt.Color.RED);
+			w.writeText("You Lost ,Sum = " + sum);
+		}
+
+	}
+
+}

@@ -1,0 +1,11 @@
+import java.util.Scanner;
+2
+3 public class SquareRoot {
+4 public static void main(String[] args) {
+5 Scanner scanner = new Scanner(System.in);
+6 while (scanner.hasNext()) {
+7 double d = scanner.nextDouble();
+8 System.out.println(Math.sqrt(d));
+9 }
+10 }
+11 }
